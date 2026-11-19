@@ -14,6 +14,7 @@ import {
   useState,
   useEffect,
 } from "react";
+import { View, ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Toast from "react-native-toast-message";
@@ -91,7 +92,16 @@ export default function App() {
       }
     };
 
-    loadAuth();
+    loadAuth().finally(() => {
+      SplashScreen.hideAsync().catch(() => {});
+    });
+
+    const fallbackTimer = setTimeout(() => {
+      SplashScreen.hideAsync().catch(() => {});
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(fallbackTimer);
   }, []);
 
   useEffect(() => {
@@ -101,7 +111,11 @@ export default function App() {
   }, [loading]);
 
   if (loading) {
-    return null;
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#ffffff" }}>
+        <ActivityIndicator size="large" color="#0cbb69" />
+      </View>
+    );
   }
 
   return (
