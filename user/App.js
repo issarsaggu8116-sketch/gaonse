@@ -1,5 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
 import * as Linking from "expo-linking";
+import * as SplashScreen from "expo-splash-screen";
+
+// Keep native splash screen visible while loading auth/initial state
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 import {
   createNativeStackNavigator,
@@ -89,6 +93,12 @@ export default function App() {
 
     loadAuth();
   }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      SplashScreen.hideAsync().catch(() => {});
+    }
+  }, [loading]);
 
   if (loading) {
     return null;

@@ -40,9 +40,6 @@
       "expo-web-browser",
       "expo-font"
     ],
-    "experiments": {
-      "reactCompiler": true
-    },
     "extra": {
       "eas": {
         "projectId": "f21b65d3-ffc6-421b-b1d6-24d04fc2c5ee"

@@ -3,7 +3,7 @@ import { Platform } from "react-native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 
 import {
   useSafeAreaInsets,
