@@ -53,41 +53,32 @@ const Login = () => {
         },
         {
           headers: {
-            "Content-Type":
-              "application/json",
+            "Content-Type": "application/json",
           },
-
           withCredentials: true,
         }
       );
 
-      // 👤 GET USER
-      const userRes = await axios.get(
-        `${BASE_URL}/api/v1/user/me`,
-        {
-          withCredentials: true,
-        }
-      );
+      const user = res.data.user;
+      const token = res.data.token;
 
-      // ✅ SAVE USER
-      const user =
-        userRes.data.user;
+      // 💾 SAVE TOKEN
+      if (token) {
+        await AsyncStorage.setItem("token", token);
+        if (typeof global !== "undefined") {
+          global.userToken = token;
+        }
+      }
 
       // ✅ SAVE LOGIN STATE
-      await AsyncStorage.setItem(
-        "isAuthenticated",
-        "true"
-      );
+      await AsyncStorage.setItem("isAuthenticated", "true");
 
       // ✅ SAVE USER
-      await AsyncStorage.setItem(
-        "user",
-        JSON.stringify(user)
-      );
+      await AsyncStorage.setItem("user", JSON.stringify(user));
 
       Toast.show({
         type: "success",
-        text1: res.data.message,
+        text1: res.data.message || "Login successful",
       });
 
       // ✅ UPDATE CONTEXT

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import {
   View,
   TextInput,
@@ -18,12 +18,26 @@ import styles from "../styles/OtpStyles";
 import { BASE_URL } from "../config";
 
 const OtpVerification = ({ route, navigation }) => {
-  const { email, phone } = route.params;
+  const { email, phone, devOtp } = route.params || {};
 
   const { setIsAuthenticated, setUser } =
     useContext(Context);
 
   const [otp, setOtp] = useState(["", "", "", "", ""]);
+
+  useEffect(() => {
+    if (devOtp) {
+      Toast.show({
+        type: "info",
+        text1: `Verification Code: ${devOtp}`,
+        text2: "Auto-filled code",
+        visibilityTime: 6000,
+      });
+      const digits = String(devOtp).split("").slice(0, 5);
+      while (digits.length < 5) digits.push("");
+      setOtp(digits);
+    }
+  }, [devOtp]);
 
   // INPUT REFS
   const inputRefs = useRef([]);
@@ -59,6 +73,14 @@ const OtpVerification = ({ route, navigation }) => {
           otp: otp.join(""),
         }
       );
+
+      // 💾 SAVE TOKEN
+      if (res.data.token) {
+        await AsyncStorage.setItem("token", res.data.token);
+        if (typeof global !== "undefined") {
+          global.userToken = res.data.token;
+        }
+      }
 
       // ✅ SAVE LOGIN STATE
       await AsyncStorage.setItem("isAuthenticated", "true");

@@ -28,45 +28,61 @@ const Profile = ({ navigation }) => {
         }
       );
 
-      setUserData(data.user);
+      if (data?.user) {
+        setUserData(data.user);
+        await AsyncStorage.setItem("user", JSON.stringify(data.user));
+      }
     } catch (error) {
-      Toast.show({
-        type: "error",
-        text1:
-          error?.response?.data?.message || "User fetch failed",
-      });
+      console.log("Profile user fetch:", error?.response?.data || error.message);
+      // If token expired, clear and redirect
+      if (error?.response?.status === 400 || error?.response?.status === 401) {
+        Toast.show({
+          type: "error",
+          text1: error?.response?.data?.message || "Please log in again",
+        });
+      }
     }
   };
 
   useEffect(() => {
+    const loadCachedUser = async () => {
+      try {
+        const cached = await AsyncStorage.getItem("user");
+        if (cached) {
+          setUserData(JSON.parse(cached));
+        }
+      } catch (e) {}
+    };
+    loadCachedUser();
     fetchUser();
   }, []);
 
   // 🚪 Logout
   const logout = async () => {
     try {
-      const res = await axios.get(
+      await axios.get(
         `${BASE_URL}/api/v1/user/logout`,
         {
           withCredentials: true,
         }
       );
-
+    } catch (e) {
+      // Ignore network logout error and clear local session
+    } finally {
       // 🧹 CLEAR STORAGE
       await AsyncStorage.removeItem("isAuthenticated");
       await AsyncStorage.removeItem("user");
+      await AsyncStorage.removeItem("token");
+      if (typeof global !== "undefined") {
+        global.userToken = null;
+      }
 
-      Toast.show({ type: "success", text1: res.data.message });
+      Toast.show({ type: "success", text1: "Logged out successfully" });
 
       setUser(null);
       setIsAuthenticated(false);
 
       navigation.replace("Auth");
-    } catch (err) {
-      Toast.show({
-        type: "error",
-        text1: err?.response?.data?.message || "Logout failed",
-      });
     }
   };
 

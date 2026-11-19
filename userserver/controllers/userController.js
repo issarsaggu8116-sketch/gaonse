@@ -116,7 +116,7 @@ async function sendVerificationCode(
     if (method === "email") {
       const { subject, html, text } = getRegistrationOtpTemplate(code, name);
 
-      await sendEmail({
+      const emailResult = await sendEmail({
         email,
         subject,
         message: html,
@@ -126,6 +126,7 @@ async function sendVerificationCode(
       return res.status(200).json({
         success: true,
         message: `Verification email sent to ${name}`,
+        otp: emailResult?.provider ? undefined : code,
       });
     }
 

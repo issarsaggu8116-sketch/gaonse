@@ -71,10 +71,14 @@ export default function App() {
       try {
         const storedAuth = await AsyncStorage.getItem("isAuthenticated");
         const storedUser = await AsyncStorage.getItem("user");
+        const storedToken = await AsyncStorage.getItem("token");
 
         if (storedAuth === "true" && storedUser) {
           setIsAuthenticated(true);
           setUser(JSON.parse(storedUser));
+          if (storedToken && typeof global !== "undefined") {
+            global.userToken = storedToken;
+          }
         }
       } catch (err) {
         console.log("Failed to load auth state", err);

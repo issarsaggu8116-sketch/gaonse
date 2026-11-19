@@ -100,6 +100,7 @@ const Register = () => {
       navigation.navigate("OtpVerification", {
         email: data.email,
         phone: data.phone,
+        devOtp: res.data?.otp,
       });
     } catch (error) {
       Toast.show({
