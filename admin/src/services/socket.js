@@ -1,5 +1,10 @@
 import { io } from "socket.io-client";
 
-const socket = io("https://adminapi.gaonse.in/");
+export const SOCKET_URL = process.env.EXPO_PUBLIC_SOCKET_URL || "https://adminapi.gaonse.in";
+
+const socket = io(SOCKET_URL, {
+  transports: ["websocket", "polling"],
+  autoConnect: true,
+});
 
 export default socket;

@@ -193,7 +193,8 @@ export const unassignOrder = async (req, res) => {
 
     // Notify delivery backend of unassigned order so it is broadcast to delivery partner zone room
     try {
-      fetch("http://localhost:4001/api/delivery/today-orders/notify", {
+      const deliveryApiBase = process.env.DELIVERY_API_URL || "http://localhost:4001";
+      fetch(`${deliveryApiBase}/api/delivery/today-orders/notify`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ order }),

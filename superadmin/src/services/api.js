@@ -2,7 +2,7 @@
 // GAON SE SUPER ADMIN API CONFIGURATION
 // ==============================================================================
 // Configurable via EXPO_PUBLIC_API_URL (defaults to production if not set)
-const BASE_URL = process.env.EXPO_PUBLIC_API_URL || "https://api.gaonse.in/api/v1/master";
+const BASE_URL = process.env.EXPO_PUBLIC_API_URL || "https://superadmin.gaonse.in/api/v1/master";
 
 const DEFAULT_HEADERS = {
   "Content-Type": "application/json",
@@ -13,7 +13,7 @@ async function request(endpoint, options = {}) {
   const url = endpoint.startsWith("http") ? endpoint : `${BASE_URL}${endpoint}`;
   
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000);
+  const timeoutId = setTimeout(() => controller.abort(), 15000);
 
   try {
     const response = await fetch(url, {
