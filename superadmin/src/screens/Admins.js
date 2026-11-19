@@ -203,7 +203,7 @@ const Admins = () => {
                   )}
                 </TouchableOpacity>
 
-                {editId && (
+                {editId ? (
                   <TouchableOpacity
                     onPress={() => {
                       setEditId(null);
@@ -213,7 +213,7 @@ const Admins = () => {
                   >
                     <Text style={styles.cancelBtnText}>Cancel</Text>
                   </TouchableOpacity>
-                )}
+                ) : null}
               </View>
             </View>
 

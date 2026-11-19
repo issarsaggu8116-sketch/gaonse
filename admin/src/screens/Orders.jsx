@@ -104,20 +104,20 @@ const Orders = () => {
       </View>
 
       {/* LOADING */}
-      {loading && !refreshing && (
+      {loading && !refreshing ? (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#6366f1" />
         </View>
-      )}
+      ) : null}
 
       {/* EMPTY STATE */}
-      {!loading && orders.length === 0 && (
+      {!loading && orders.length === 0 ? (
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyEmoji}>🎉</Text>
           <Text style={styles.emptyTitle}>All caught up!</Text>
           <Text style={styles.emptySubtitle}>No pending orders to review right now.</Text>
         </View>
-      )}
+      ) : null}
 
       {/* LIST */}
       <FlatList

@@ -130,7 +130,7 @@ const Categories = () => {
             </Text>
           </TouchableOpacity>
 
-          {editId && (
+          {editId ? (
             <TouchableOpacity
               onPress={() => {
                 setEditId(null);
@@ -141,7 +141,7 @@ const Categories = () => {
             >
               <Text style={styles.cancelBtnText}>Cancel Edit</Text>
             </TouchableOpacity>
-          )}
+          ) : null}
         </View>
 
         {/* LIST */}

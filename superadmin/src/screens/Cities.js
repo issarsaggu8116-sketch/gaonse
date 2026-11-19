@@ -133,7 +133,7 @@ const Cities = () => {
                   )}
                 </TouchableOpacity>
 
-                {editId && (
+                {editId ? (
                   <TouchableOpacity
                     onPress={() => {
                       setEditId(null);
@@ -143,7 +143,7 @@ const Cities = () => {
                   >
                     <Text style={styles.cancelBtnText}>Cancel</Text>
                   </TouchableOpacity>
-                )}
+                ) : null}
               </View>
             </View>
 

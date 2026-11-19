@@ -189,11 +189,11 @@ const Zones = () => {
             </Text>
           </TouchableOpacity>
 
-          {editId && (
+          {editId ? (
             <TouchableOpacity onPress={cancelEdit} style={styles.cancelBtn}>
               <Text style={styles.cancelBtnText}>Cancel Edit</Text>
             </TouchableOpacity>
-          )}
+          ) : null}
         </View>
 
         {/* ZONES LIST */}

@@ -763,7 +763,7 @@ export default function SubscriptionScreen() {
                 </Text>
               </TouchableOpacity>
 
-              {orders.length > 0 && (
+              {orders.length > 0 ? (
                 <TouchableOpacity
                   onPress={openMultiStopRoute}
                   activeOpacity={0.8}
@@ -780,7 +780,7 @@ export default function SubscriptionScreen() {
                   />
                   <Text style={styles.primaryActionBtnText}>View Route Map</Text>
                 </TouchableOpacity>
-              )}
+              ) : null}
             </View>
           </View>
         }

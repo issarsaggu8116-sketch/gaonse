@@ -287,9 +287,9 @@ const Dashboard = () => {
             );
           })}
 
-          {data.products.length === 0 && (
+          {data.products.length === 0 ? (
             <Text style={styles.emptyText}>No products found</Text>
-          )}
+          ) : null}
         </View>
 
         {/* INVENTORY SECTION */}
@@ -329,9 +329,9 @@ const Dashboard = () => {
             );
           })}
 
-          {inventory.length === 0 && (
+          {inventory.length === 0 ? (
             <Text style={styles.emptyText}>No inventory data yet</Text>
-          )}
+          ) : null}
         </View>
       </ScrollView>
     </SafeAreaView>

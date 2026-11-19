@@ -227,7 +227,7 @@ const Products = () => {
             ))}
           </View>
 
-          {form.category && (
+          {form.category ? (
             <View style={styles.subPolicyContainer}>
               <Text style={styles.subPolicyText}>
                 Subscription Policy:{" "}
@@ -238,7 +238,7 @@ const Products = () => {
                 </Text>
               </Text>
             </View>
-          )}
+          ) : null}
 
           <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
             <Text style={styles.btnText}>
@@ -246,7 +246,7 @@ const Products = () => {
             </Text>
           </TouchableOpacity>
 
-          {editId && (
+          {editId ? (
             <TouchableOpacity
               onPress={() => {
                 setEditId(null);
@@ -263,7 +263,7 @@ const Products = () => {
             >
               <Text style={styles.cancelBtnText}>Cancel Edit</Text>
             </TouchableOpacity>
-          )}
+          ) : null}
         </View>
 
         {/* PRODUCTS LIST */}
@@ -287,13 +287,13 @@ const Products = () => {
                         style={styles.productCardImage}
                         resizeMode="cover"
                       />
-                      {item.discount > 0 && (
+                      {item.discount > 0 ? (
                         <View style={styles.discountBadge}>
                           <Text style={styles.discountBadgeText}>
                             {item.discount}% OFF
                           </Text>
                         </View>
-                      )}
+                      ) : null}
                     </View>
                   ) : null}
 
@@ -307,9 +307,9 @@ const Products = () => {
                       <Text style={styles.sellingPriceText}>
                         ₹{sellingPrice.toFixed(2)}
                       </Text>
-                      {item.discount > 0 && (
+                      {item.discount > 0 ? (
                         <Text style={styles.mrpText}>₹{item.price}</Text>
-                      )}
+                      ) : null}
                     </View>
 
                     <View style={styles.stockStatusContainer}>
@@ -338,11 +338,11 @@ const Products = () => {
                         </Text>
                       </View>
 
-                      {item.category?.isSubscriptionAllowed && (
+                      {item.category?.isSubscriptionAllowed ? (
                         <View style={styles.subscriptionBadge}>
                           <Text style={styles.subscriptionBadgeText}>🔄 Subs Allowed</Text>
                         </View>
-                      )}
+                      ) : null}
                     </View>
 
                     <View style={styles.divider} />

@@ -326,7 +326,7 @@ const CartScreen = ({ navigation }) => {
               : `₹${availableBalance}`}
           </Text>
 
-          {blockedAmount > 0 && (
+          {blockedAmount > 0 ? (
             <Text
               style={{
                 marginTop: 5,
@@ -337,7 +337,7 @@ const CartScreen = ({ navigation }) => {
               ₹{blockedAmount} reserved
               in pending orders
             </Text>
-          )}
+          ) : null}
         </View>
 
         {/* CART */}
