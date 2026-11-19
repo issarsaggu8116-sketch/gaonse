@@ -21,11 +21,9 @@
       "package": "com.ayushchoudhary.adminapp"
     },
     "web": {
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "output": "single"
     },
     "plugins": [
-      "expo-router",
       [
         "expo-splash-screen",
         {
@@ -42,11 +40,9 @@
       "expo-font"
     ],
     "experiments": {
-      "typedRoutes": true,
       "reactCompiler": true
     },
     "extra": {
-      "router": {},
       "eas": {
         "projectId": "add59945-26e3-4a0b-bd67-6576f5cf7b79"
       }

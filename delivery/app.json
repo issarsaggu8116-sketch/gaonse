@@ -21,11 +21,9 @@
       "package": "com.ayushchoudhary.deliveryapp"
     },
     "web": {
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "output": "single"
     },
     "plugins": [
-      "expo-router",
       [
         "expo-splash-screen",
         {
@@ -42,11 +40,9 @@
       "expo-font"
     ],
     "experiments": {
-      "typedRoutes": true,
       "reactCompiler": true
     },
     "extra": {
-      "router": {},
       "eas": {
         "projectId": "4dc565b1-ed4c-49b1-941f-9aadd7f43f8e"
       }

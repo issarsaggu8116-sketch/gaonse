@@ -21,11 +21,9 @@
       "package": "com.ayushchoudhary.masterapp"
     },
     "web": {
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "output": "single"
     },
     "plugins": [
-      "expo-router",
       [
         "expo-splash-screen",
         {
@@ -42,11 +40,9 @@
       "expo-font"
     ],
     "experiments": {
-      "typedRoutes": true,
       "reactCompiler": true
     },
     "extra": {
-      "router": {},
       "eas": {
         "projectId": "660eaffc-542c-4711-81c7-c7d5891f36b8"
       }
