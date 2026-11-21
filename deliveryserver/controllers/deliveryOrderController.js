@@ -688,7 +688,6 @@ export const acceptOrder = async (req, res) => {
       {
         $set: {
           deliveredBy: partner._id,
-          status: "approved",
           earning: earning,
         },
       },
